@@ -8,13 +8,17 @@ CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = [
     'pyramid',
+    'SQLAlchemy',
+    'transaction',
+    'pyramid_tm',
     'pyramid_debugtoolbar',
+    'zope.sqlalchemy',
     'waitress',
     ]
 
-setup(name='',
-      version='0.0',
-      description='',
+setup(name='brewcontrol',
+      version='0.1',
+      description='Control the temperature of a beer while brewing',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
         "Programming Language :: Python",
@@ -25,15 +29,16 @@ setup(name='',
       author='',
       author_email='',
       url='',
-      keywords='web pyramid pylons',
+      keywords='web wsgi bfg pylons pyramid',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
+      test_suite='brewcontrol',
       install_requires=requires,
-      tests_require=requires,
-      test_suite="",
       entry_points="""\
       [paste.app_factory]
-      main = :main
+      main = brewcontrol:main
+      [console_scripts]
+      initialize_brewcontrol_db = brewcontrol.scripts.initializedb:main
       """,
       )
