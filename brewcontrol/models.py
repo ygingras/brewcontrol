@@ -1,7 +1,10 @@
 from sqlalchemy import (
     Column,
     Integer,
+    Float, 
+    Integer,
     Text,
+    DateTime,
     )
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -16,6 +19,20 @@ from zope.sqlalchemy import ZopeTransactionExtension
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
+
+class TempSample(Base):
+    __tablename__ = 'tempsamples'
+    id = Column(Integer, primary_key=True)
+    date = Column(DateTime)
+    temp = Column(Float)
+    target = Column(Float)
+    
+    def __init__(self, date, temp, target):
+        super(TempSample, self).__init__()
+        self.date = date
+        self.temp = temp
+        self.target = target
+        
 
 class MyModel(Base):
     __tablename__ = 'models'

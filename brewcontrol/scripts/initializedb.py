@@ -1,6 +1,7 @@
 import os
 import sys
 import transaction
+from datetime import datetime
 
 from sqlalchemy import engine_from_config
 
@@ -12,6 +13,7 @@ from pyramid.paster import (
 from ..models import (
     DBSession,
     MyModel,
+    TempSample,
     Base,
     )
 
@@ -35,3 +37,6 @@ def main(argv=sys.argv):
     with transaction.manager:
         model = MyModel(name='one', value=1)
         DBSession.add(model)
+        for t in [23.4, 25.0, 28.4]:
+            temp = TempSample(datetime.now(), t, 65)
+            DBSession.add(temp)
