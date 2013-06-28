@@ -1,2 +1,3 @@
 brewcontrol.egg-info
 brewcontrol.sqlite
+*.pyc

@@ -9,6 +9,12 @@ from .models import (
     )
 
 
+@view_config(route_name='samples', renderer='samples.mak')
+def samples(request):
+    one = "Sample one"
+    return {'one': one, 'project': 'brewcontrol'}
+
+
 @view_config(route_name='home', renderer='templates/mytemplate.pt')
 def my_view(request):
     try:
