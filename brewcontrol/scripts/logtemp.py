@@ -61,8 +61,9 @@ def main():
     if args.demo_mode:
         sensors = [DEMO_PATH]
     else:
-        sensors = [os.path.join(d, "w1_slave")
-                    for d in os.listdir("/sys/bus/w1/devices/")
+        base = "/sys/bus/w1/devices/"
+        sensors = [os.path.join(base, d, "w1_slave")
+                    for d in os.listdir(base)
                     if 'master' not in d]
 
     if not sensors:
