@@ -5,14 +5,21 @@ from sqlalchemy.exc import DBAPIError
 
 from .models import (
     DBSession,
-    MyModel,
+    TempSample,
     )
 
 
 @view_config(route_name='samples', renderer='samples.mak')
 def samples(request):
-    10 / 0
-    return {'project': 'brewcontrol'}
+    samples = DBSession.query(TempSample).all()
+
+    sensors = {}
+    for s in samples:
+        sensors[s.sensor] = None
+    for s, i in enumerate(sensors.keys()):
+        sensors[s] = i
+    return {'samples': reversed(samples), 
+            'sensors': sensors}
 
 @view_config(route_name='settings')
 def settings(request):
