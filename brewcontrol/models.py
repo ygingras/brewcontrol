@@ -5,6 +5,7 @@ from sqlalchemy import (
     Integer,
     Text,
     DateTime,
+    Unicode,
     )
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -24,12 +25,14 @@ class TempSample(Base):
     __tablename__ = 'tempsamples'
     id = Column(Integer, primary_key=True)
     date = Column(DateTime)
+    sensor = Column(Unicode)
     temp = Column(Float)
     target = Column(Float)
     
-    def __init__(self, date, temp, target):
+    def __init__(self, date, sensor, temp, target):
         super(TempSample, self).__init__()
         self.date = date
+        self.sensor = sensor
         self.temp = temp
         self.target = target
         

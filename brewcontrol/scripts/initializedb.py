@@ -37,6 +37,3 @@ def main(argv=sys.argv):
     with transaction.manager:
         model = MyModel(name='one', value=1)
         DBSession.add(model)
-        for t in [23.4, 25.0, 28.4]:
-            temp = TempSample(datetime.now(), t, 65)
-            DBSession.add(temp)
