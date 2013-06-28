@@ -61,9 +61,9 @@ def main():
     if args.demo_mode:
         sensors = [DEMO_PATH]
     else:
-        [os.path.join(d, "w1_slave")
-         for d in os.listdir("/sys/bus/w1/devices/")
-         if 'master' not in d]
+        sensors = [os.path.join(d, "w1_slave")
+                    for d in os.listdir("/sys/bus/w1/devices/")
+                    if 'master' not in d]
 
     if not sensors:
         raise RuntimeError("Can't find any temperature sensor.  Did you"
