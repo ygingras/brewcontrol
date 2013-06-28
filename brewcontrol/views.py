@@ -11,16 +11,17 @@ from .models import (
 
 @view_config(route_name='samples', renderer='samples.mak')
 def samples(request):
+    10 / 0
     return {'project': 'brewcontrol'}
 
 @view_config(route_name='settings')
-def samples(request):
+def settings(request):
     return Response("not implemented", status=500)
 
 @view_config(route_name='shutdown')
-def samples(request):
+def shutdown(request):
     return Response("not implemented", status=500)
 
 @view_config(route_name='home', renderer='home.mak')
-def my_view(request):
+def home(request):
     return {}

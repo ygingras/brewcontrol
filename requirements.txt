@@ -13,3 +13,4 @@ pyramid==1.4
 pyramid-debugtoolbar==1.0.4
 pyramid-deform==0.2a5
 waitress==0.8.5
+WebError==0.10.3
