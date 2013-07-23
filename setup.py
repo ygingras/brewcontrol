@@ -41,5 +41,6 @@ setup(name='brewcontrol',
       [console_scripts]
       initialize_brewcontrol_db = brewcontrol.scripts.initializedb:main
       logtemp = brewcontrol.scripts.logtemp:main
+      setup-pins = brewcontrol.scripts.setup_pins:main
       """,
       )
