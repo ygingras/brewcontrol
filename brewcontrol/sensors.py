@@ -31,7 +31,7 @@ NB_ATTEMPTS = 5  # reading from the sensor does not always work but we can retry
 def read_temp(id):
     path = sensor_path(id)
     for i in range(NB_ATTEMPTS):
-        output = open(sensor_path).readlines()
+        output = open(path).readlines()
         if 'YES' in output[0]:
             return output[1].split('=')[1]
         else:
@@ -41,14 +41,17 @@ def read_temp(id):
 def sensor_path(id):
     """Return the file system path of a temperature sensor given an int id 
        or a serial string."""
-    if os.isfile(os.path.join(W1_DIR, id)):
-        return os.path.join(W1_DIR, id, W1_SUFFIX)
-    elif os.isfile(os.path.join(W1_DIR, W1_PREFIX + id)):
-        return os.path.join(W1_DIR, W1_PREFIX + id, W1_SUFFIX)
-    elif isinstance(id, int):
+    if isinstance(id, int):
         settings = get_current_registry().settings
-        sensor = aslist(settings["brewcontrol.tempsensors"])[id]
+        id = aslist(settings["brewcontrol.tempsensors"])[id]
+
+    if os.path.isdir(os.path.join(W1_DIR, id)):
+        return os.path.join(W1_DIR, id, W1_SUFFIX)
+    elif os.path.isdir(os.path.join(W1_DIR, W1_PREFIX + id)):
         return os.path.join(W1_DIR, W1_PREFIX + id, W1_SUFFIX)
+    raise ValueError("Not a valid temperature sensor identifier: %r ." % id
+                     + "Are you running this on a Raspi?")
+
 
 def path_to_id(path):
     base = os.path.split(path)[0]
