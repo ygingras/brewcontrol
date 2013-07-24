@@ -21,7 +21,7 @@
           <tr>
             <td>${sample.date.isoformat()}</td>
             <td>${path_to_id(sample.sensor)}</td>
-            <td>${sample.temp / 1000.0}</td>
+            <td>${sample.temp}</td>
           </tr>
       % endif
     % endfor

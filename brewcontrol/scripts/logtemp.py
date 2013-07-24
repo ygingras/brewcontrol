@@ -18,32 +18,15 @@ from ..models import (
 
 import time
 from argparse import ArgumentParser
+from brewcontrol.sensors import read_temp
 
 DEMO_MODE=True
 
 DEMO_PATH='dummy_device'
-frequency=10.0
-
-def read_temp(sensor_path):
-    while True:
-        output = open(sensor_path).readlines()
-        if 'YES' in output[0]:
-            return output[1].split('=')[1]
-        else:
-            time.sleep(1.0)    
-
 
 def record_temp(c, temp):
     curtime = time.time()
     c.execute("INSERT INTO temps VALUES (%f, %s,100)" % (curtime, temp))
-
-def recorder_loop(conn):
-    c = conn.cursor()
-    while True:
-        temp = read_temp()
-        record_temp(c, temp)
-        conn.commit()
-        time.sleep(frequency)
 
 def parse_args():
     p = ArgumentParser()

@@ -33,7 +33,7 @@ def read_temp(id):
     for i in range(NB_ATTEMPTS):
         output = open(path).readlines()
         if 'YES' in output[0]:
-            return output[1].split('=')[1]
+            return int(output[1].split('=')[1]) * .001
         else:
             time.sleep(0.1)    
 
