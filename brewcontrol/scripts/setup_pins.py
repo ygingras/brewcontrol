@@ -1,5 +1,4 @@
 import sys
-from RPi import GPIO
 
 from pyramid.settings import aslist
 from pyramid.paster import (
@@ -16,6 +15,9 @@ def usage(argv):
 
 
 def main(argv=sys.argv):
+    # late import so we can run on a non-raspi device
+    from RPi import GPIO
+
     if len(argv) != 2:
         usage(argv)
     config_uri = argv[1]

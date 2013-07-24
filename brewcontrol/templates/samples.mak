@@ -1,5 +1,11 @@
 <%inherit file="base.mak"/>
 
+<%!
+
+    from brewcontrol.sensors import path_to_id
+
+%>
+
 <p>
   Those are the last few logged samples <br>
 
@@ -14,7 +20,7 @@
       % if True:
           <tr>
             <td>${sample.date.isoformat()}</td>
-            <td>${sample.sensor[len('/sys/bus/w1/devices/'):].split()[0]}</td>
+            <td>${path_to_id(sample.sensor)}</td>
             <td>${sample.temp / 1000.0}</td>
           </tr>
       % endif
