@@ -56,8 +56,11 @@ def sensor_path(id):
 
 
 def path_to_id(path):
-    base = os.path.split(path)[0]
-    serial = os.path.split(base)[1].replace(W1_PREFIX, '')
+    if os.path.isabs(path):
+        base = os.path.split(path)[0]
+        serial = os.path.split(base)[1].replace(W1_PREFIX, '')
+    else:
+        serial = path
 
     settings = get_current_registry().settings
     sensors = aslist(settings["brewcontrol.tempsensors"])
