@@ -20,6 +20,7 @@
       % if True:
           <tr>
             <td>${sample.date.isoformat()}</td>
+            <td>${sample.sensor}</td>
             <td>${path_to_id(sample.sensor)}</td>
             <td>${sample.temp}</td>
           </tr>
