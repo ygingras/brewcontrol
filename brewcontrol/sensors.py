@@ -45,10 +45,12 @@ def sensor_path(id):
         settings = get_current_registry().settings
         id = aslist(settings["brewcontrol.tempsensors"])[id]
 
-    if os.path.isdir(os.path.join(W1_DIR, id)):
-        return os.path.join(W1_DIR, id, W1_SUFFIX)
-    elif os.path.isdir(os.path.join(W1_DIR, W1_PREFIX + id)):
-        return os.path.join(W1_DIR, W1_PREFIX + id, W1_SUFFIX)
+    path = os.path.join(W1_DIR, id, W1_SUFFIX)
+    if os.path.isfile(path):
+        return path
+    path = os.path.join(W1_DIR, W1_PREFIX + id, W1_SUFFIX)
+    if os.path.isfile(path):
+        return path
     raise ValueError("Not a valid temperature sensor identifier: %r ." % id
                      + "Are you running this on a Raspi?")
 
