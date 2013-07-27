@@ -53,6 +53,11 @@ def main():
 
     with transaction.manager:
         for s in sensors:
+            try:
+                sensor_path(s)
+            except ValueError:
+                # probably not a valid sensor
+                continue
             temp = read_temp(s)
             rec = TempSample(datetime.now(), s, temp, 65)
             DBSession.add(rec)
